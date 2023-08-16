@@ -40,23 +40,23 @@ const servers = {
     ]
 }
 
-let constraints = {
-    video: {
-        width: {
-            min: 640,
-            ideal: 1920,
-            max: 1920
-        },
-        height: {
-            min: 640,
-            ideal: 1080,
-            max: 1080
-        },
-    },
-    audio: true
-}
+// let constraints = {
+//     video: {
+//         width: {
+//             min: 640,
+//             ideal: 1920,
+//             max: 1920
+//         },
+//         height: {
+//             min: 640,
+//             ideal: 1080,
+//             max: 1080
+//         },
+//     },
+//     audio: true
+// }
 
-// let constraints = {video: true, audio: true}
+let constraints = {video: true, audio: false}
 
 let init = async() => {
     client = await AgoraRTM.createInstance(APP_ID)

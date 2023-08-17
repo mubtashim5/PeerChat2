@@ -56,7 +56,7 @@ const servers = {
 //     audio: true
 // }
 
-let constraints = {video: true, audio: false}
+let constraints = {video: true, audio: true}
 
 let init = async() => {
     client = await AgoraRTM.createInstance(APP_ID)
@@ -140,10 +140,7 @@ let createPeerConnection = async (MemberId) => {
     document.getElementById('user-1').classList.add('smallFrame')
 
     if (!localStream) {
-        localStream = await navigator.mediaDevices.getUserMedia({
-            video : true,
-            audio : false
-        })
+        localStream = await navigator.mediaDevices.getUserMedia(constraints)
     }
 
     localStream.getTracks().forEach((track) => {

@@ -18,72 +18,33 @@ let localStream;
 let remoteStream;
 let peerConnection;
 
-// const servers = {
-//     iceServers: [
-//         {
-//             urls: ['stun:stun1.l.google.com:19302',
-//                    'stun:stun2.l.google.com:19302']
-//         }
-//     ]
-// }
-
-// const servers = {
-//     iceServers: [
-//         // {
-//         //     // url: 'turn:192.158.29.39:3478?transport=udp',
-//         //     // credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-//         //     // username: '28224511:1379330808'
-//         //     url: 'turn:relay1.expressturn.com:3478',
-//         //     username: 'efQ4A81BFTV6E3JTDD',
-//         //     credential: 'Jz2evOzYm77j2RrE'
-//         // }
-//     ]
-// }
-
 const servers = {
-    "username": "dc2d2894d5a9023620c467b0e71cfa6a35457e6679785ed6ae9856fe5bdfa269",
-    "ice_servers": [
-      {
-        "urls": "stun:global.stun.twilio.com:3478"
-      },
-      {
-        "username": "dc2d2894d5a9023620c467b0e71cfa6a35457e6679785ed6ae9856fe5bdfa269",
-        "credential": "tE2DajzSJwnsSbc123",
-        "urls": "turn:global.turn.twilio.com:3478?transport=udp"
-      },
-      {
-        "username": "dc2d2894d5a9023620c467b0e71cfa6a35457e6679785ed6ae9856fe5bdfa269",
-        "credential": "tE2DajzSJwnsSbc123",
-        "urls": "turn:global.turn.twilio.com:3478?transport=tcp"
-      },
-      {
-        "username": "dc2d2894d5a9023620c467b0e71cfa6a35457e6679785ed6ae9856fe5bdfa269",
-        "credential": "tE2DajzSJwnsSbc123",
-        "urls": "turn:global.turn.twilio.com:443?transport=tcp"
-      }
-    ],
-    "date_updated": "Fri, 01 May 2020 01:42:57 +0000",
-    "account_sid": "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    "ttl": "86400",
-    "date_created": "Fri, 01 May 2020 01:42:57 +0000",
-    "password": "tE2DajzSJwnsSbc123"
-  }
-
-// let constraints = {
-//     video: {
-//         width: {
-//             min: 640,
-//             ideal: 1920,
-//             max: 1920
-//         },
-//         height: {
-//             min: 640,
-//             ideal: 1080,
-//             max: 1080
-//         },
-//     },
-//     audio: true
-// }
+    iceServers: [
+        {
+          urls: "stun:stun.relay.metered.ca:80",
+        },
+        {
+          urls: "turn:a.relay.metered.ca:80",
+          username: "42452f86614ef4310e1c1027",
+          credential: "TE7tdLuKhPZh7Q3o",
+        },
+        {
+          urls: "turn:a.relay.metered.ca:80?transport=tcp",
+          username: "42452f86614ef4310e1c1027",
+          credential: "TE7tdLuKhPZh7Q3o",
+        },
+        {
+          urls: "turn:a.relay.metered.ca:443",
+          username: "42452f86614ef4310e1c1027",
+          credential: "TE7tdLuKhPZh7Q3o",
+        },
+        {
+          urls: "turn:a.relay.metered.ca:443?transport=tcp",
+          username: "42452f86614ef4310e1c1027",
+          credential: "TE7tdLuKhPZh7Q3o",
+        },
+    ]
+}
 
 let constraints = {video: true, audio: true}
 
@@ -91,7 +52,6 @@ let init = async() => {
     client = await AgoraRTM.createInstance(APP_ID)
     await client.login({uid, token})
 
-    // channel = client.createChannel('main')
     channel = client.createChannel(roomId)
     await channel.join()
 
@@ -134,33 +94,6 @@ let handleUserJoined = async(MemberId) => {
 
 let createPeerConnection = async (MemberId) => {
     peerConnection = new RTCPeerConnection(servers)
-    // peerConnection = new RTCPeerConnection({
-    //     iceServers: [
-    //         {
-    //           urls: "stun:stun.relay.metered.ca:80",
-    //         },
-    //         {
-    //           urls: "turn:a.relay.metered.ca:80",
-    //           username: "42452f86614ef4310e1c1027",
-    //           credential: "TE7tdLuKhPZh7Q3o",
-    //         },
-    //         {
-    //           urls: "turn:a.relay.metered.ca:80?transport=tcp",
-    //           username: "42452f86614ef4310e1c1027",
-    //           credential: "TE7tdLuKhPZh7Q3o",
-    //         },
-    //         {
-    //           urls: "turn:a.relay.metered.ca:443",
-    //           username: "42452f86614ef4310e1c1027",
-    //           credential: "TE7tdLuKhPZh7Q3o",
-    //         },
-    //         {
-    //           urls: "turn:a.relay.metered.ca:443?transport=tcp",
-    //           username: "42452f86614ef4310e1c1027",
-    //           credential: "TE7tdLuKhPZh7Q3o",
-    //         },
-    //     ],
-    //   });
 
     remoteStream = new MediaStream()
     document.getElementById('user-2').srcObject = remoteStream

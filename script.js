@@ -104,34 +104,34 @@ let handleUserJoined = async(MemberId) => {
 }
 
 let createPeerConnection = async (MemberId) => {
-    peerConnection = new RTCPeerConnection(servers)
-    // peerConnection = new RTCPeerConnection({
-    //     iceServers: [
-    //         {
-    //           urls: "stun:stun.relay.metered.ca:80",
-    //         },
-    //         {
-    //           urls: "turn:a.relay.metered.ca:80",
-    //           username: "42452f86614ef4310e1c1027",
-    //           credential: "TE7tdLuKhPZh7Q3o",
-    //         },
-    //         {
-    //           urls: "turn:a.relay.metered.ca:80?transport=tcp",
-    //           username: "42452f86614ef4310e1c1027",
-    //           credential: "TE7tdLuKhPZh7Q3o",
-    //         },
-    //         {
-    //           urls: "turn:a.relay.metered.ca:443",
-    //           username: "42452f86614ef4310e1c1027",
-    //           credential: "TE7tdLuKhPZh7Q3o",
-    //         },
-    //         {
-    //           urls: "turn:a.relay.metered.ca:443?transport=tcp",
-    //           username: "42452f86614ef4310e1c1027",
-    //           credential: "TE7tdLuKhPZh7Q3o",
-    //         },
-    //     ],
-    //   });
+    // peerConnection = new RTCPeerConnection(servers)
+    peerConnection = new RTCPeerConnection({
+        iceServers: [
+            {
+              urls: "stun:stun.relay.metered.ca:80",
+            },
+            {
+              urls: "turn:a.relay.metered.ca:80",
+              username: "42452f86614ef4310e1c1027",
+              credential: "TE7tdLuKhPZh7Q3o",
+            },
+            {
+              urls: "turn:a.relay.metered.ca:80?transport=tcp",
+              username: "42452f86614ef4310e1c1027",
+              credential: "TE7tdLuKhPZh7Q3o",
+            },
+            {
+              urls: "turn:a.relay.metered.ca:443",
+              username: "42452f86614ef4310e1c1027",
+              credential: "TE7tdLuKhPZh7Q3o",
+            },
+            {
+              urls: "turn:a.relay.metered.ca:443?transport=tcp",
+              username: "42452f86614ef4310e1c1027",
+              credential: "TE7tdLuKhPZh7Q3o",
+            },
+        ],
+      });
 
     remoteStream = new MediaStream()
     document.getElementById('user-2').srcObject = remoteStream
